@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dale Livingston II - Homepage</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Dynamic Welcome Message -->
+    <h1 id="welcomeMessage"></h1>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>
+            My name is Dale Livingston II. I am an aspiring software engineer and data analyst, currently studying 
+            AI/ML and Information Technology. I enjoy building projects, solving problems, and learning new technologies.
+            I have been working as a Network Enginner for 10 years.
+        </p>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>My Projects</h2>
+
+        <div class="project-container">
+            <a href="https://github.com/delivingston/Cplusplus-Program" target="_blank">
+                <p>GitHub Project 1</p>
+            </a>
+
+            <a href="https://github.com/delivingston/Software-Development-Lifecycle" target="_blank">
+                <p>GitHub Project 2</p>
+            </a>
+
+            <a href="https://github.com/delivingston/AdventureGame" target="_blank">
+                <p>GitHub Project 3</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+
+        <form>
+            <label for="senderName">Name:</label><br>
+            <input type="text" id="senderName" name="senderName"><br><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br><br>
+
+            <label for="subject">Subject:</label><br>
+            <input type="text" id="subject" name="subject"><br><br>
+
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message"></textarea><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <!-- JavaScript Section -->
+    <script>
+        // Prompt the user for their name
+        let userName = prompt("Welcome! What is your name?");
+
+        // Dynamic welcome message
+        const welcomeElement = document.getElementById("welcomeMessage");
+
+        if (userName && userName.trim() !== "") {
+            welcomeElement.textContent = "Welcome to my homepage, " + userName + "!";
+        } else {
+            welcomeElement.textContent = "Welcome to my homepage!";
+        }
+    </script>
+
+</body>
+</html>
