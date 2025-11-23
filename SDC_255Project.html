@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dale Livingston II - Homepage</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dark_mode.css">
 </head>
 
 <body>
+
+    <!-- Dark Mode Toggle -->
+    <label>
+        <input type="checkbox" id="darkModeToggle">
+        Dark Mode
+    </label>
 
     <!-- Dynamic Welcome Message -->
     <h1 id="welcomeMessage"></h1>
@@ -16,6 +22,7 @@
     <nav>
         <ul>
             <li><a href="#about">About</a></li>
+            <li><a href="#featured">Featured Content</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -25,10 +32,34 @@
     <section id="about">
         <h2>About Me</h2>
         <p>
-            My name is Dale Livingston II. I am an aspiring software engineer and data analyst, currently studying 
-            AI/ML and Information Technology. I enjoy building projects, solving problems, and learning new technologies.
-            I have been working as a Network Enginner for 10 years.
+            My name is Dale Livingston II. I am an aspiring software engineer and data analyst,
+            currently studying AI/ML and Information Technology.
         </p>
+
+        <!-- Skills List Injected by JS Loop -->
+        <h3>My Skills</h3>
+        <ul id="skillsList"></ul>
+    </section>
+
+    <!-- FEATURED CONTENT SECTION -->
+    <section id="featured">
+        <h2>Featured Content</h2>
+
+        <!-- University Resources -->
+        <div id="universityResources" style="border: 2px solid #333; padding: 10px; margin-bottom: 20px;">
+            <h3>University Resources</h3>
+            <a href="https://ecpi.edu" target="_blank">ECPI Program Homepage</a>
+        </div>
+
+        <!-- Personal Projects -->
+        <div id="personalProjects" style="border: 2px solid #333; padding: 10px; margin-bottom: 20px;">
+            <h3>Personal Projects</h3>
+            <a href="https://github.com/delivingston" target="_blank">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
+                     width="50">
+            </a>
+            <p>Visit my GitHub for personal projects.</p>
+        </div>
     </section>
 
     <!-- Projects Section -->
@@ -39,11 +70,9 @@
             <a href="https://github.com/delivingston/Cplusplus-Program" target="_blank">
                 <p>GitHub Project 1</p>
             </a>
-
             <a href="https://github.com/delivingston/Software-Development-Lifecycle" target="_blank">
                 <p>GitHub Project 2</p>
-            </a>
-
+            </a>        
             <a href="https://github.com/delivingston/AdventureGame" target="_blank">
                 <p>GitHub Project 3</p>
             </a>
@@ -54,7 +83,7 @@
     <section id="contact">
         <h2>Contact Me</h2>
 
-        <form>
+        <form id="contactForm">
             <label for="senderName">Name:</label><br>
             <input type="text" id="senderName" name="senderName"><br><br>
 
@@ -67,24 +96,64 @@
             <label for="message">Message:</label><br>
             <textarea id="message" name="message"></textarea><br><br>
 
-            <button type="submit">Submit</button>
+            <button type="submit" id="submitBtn">Submit</button>
         </form>
+
     </section>
 
     <!-- JavaScript Section -->
     <script>
-        // Prompt the user for their name
+        // ================= Dynamic Welcome Message =================
         let userName = prompt("Welcome! What is your name?");
-
-        // Dynamic welcome message
         const welcomeElement = document.getElementById("welcomeMessage");
+        welcomeElement.textContent = userName && userName.trim() !== ""
+            ? "Welcome to my homepage, " + userName + "!"
+            : "Welcome to my homepage!";
 
-        if (userName && userName.trim() !== "") {
-            welcomeElement.textContent = "Welcome to my homepage, " + userName + "!";
+        // ================= Featured Content Logic =================
+        const uniDiv = document.getElementById("universityResources");
+        const personalDiv = document.getElementById("personalProjects");
+
+        const numberOfProjects = 3;  // you have 3 projects right now
+
+        if (numberOfProjects < 3) {
+            uniDiv.style.display = "block";
+            personalDiv.style.display = "none";
         } else {
-            welcomeElement.textContent = "Welcome to my homepage!";
+            uniDiv.style.display = "none";
+            personalDiv.style.display = "block";
         }
-    </script>
 
+        // ================= Skills Loop =================
+        const skills = ["Cisco Catalyst Switches", "Juniper Switches", "Meraki Switches", "Cisco Voice", "Python"];
+        const skillsList = document.getElementById("skillsList");
+
+        skills.forEach(skill => {
+            const li = document.createElement("li");
+            li.textContent = skill;
+            skillsList.appendChild(li);
+        });
+
+        // ================= Dark Mode Toggle =================
+        const darkToggle = document.getElementById("darkModeToggle");
+
+        darkToggle.addEventListener("change", function () {
+            if (darkToggle.checked) {
+                document.body.classList.add("dark-mode");
+            } else {
+                document.body.classList.remove("dark-mode");
+            }
+        });
+
+        // ================= Form Interactivity =================
+        const form = document.getElementById("contactForm");
+        const submitBtn = document.getElementById("submitBtn");
+
+        submitBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("senderName").value;
+            alert("Thank you, " + name + "! Your message has been sent!");
+        });
+    </script>
 </body>
 </html>
