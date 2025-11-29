@@ -145,15 +145,39 @@
             }
         });
 
-        // ================= Form Interactivity =================
-        const form = document.getElementById("contactForm");
-        const submitBtn = document.getElementById("submitBtn");
+        // ================= Dynamic New Section / Message =================
+        const newProjectMsg = document.createElement("p");
+        newProjectMsg.textContent = "New project added recently!";
+        newProjectMsg.style.fontWeight = "bold";
+        newProjectMsg.style.marginTop = "10px";
+        document.getElementById("projects").appendChild(newProjectMsg);
 
-        submitBtn.addEventListener("click", function(event) {
+        // ================= Modify Existing Elements =================
+        document.querySelector("#about h2").style.color = "blue";
+        document.getElementById("personalProjects").style.border = "3px solid red";
+
+        // ================= Timed Form Confirmation =================
+        const form = document.getElementById("contactForm");
+
+        form.addEventListener("submit", function(event) {
             event.preventDefault();
-            const name = document.getElementById("senderName").value;
-            alert("Thank you, " + name + "! Your message has been sent!");
+
+            let statusMsg = document.getElementById("statusMessage");
+            if (!statusMsg) {
+                statusMsg = document.createElement("p");
+                statusMsg.id = "statusMessage";
+                form.appendChild(statusMsg);
+            }
+
+            statusMsg.textContent = "Sending message...";
+            statusMsg.style.color = "orange";
+
+            setTimeout(() => {
+            statusMsg.textContent = "Message sent successfully!";
+            statusMsg.style.color = "green";
+            }, 2000);
         });
+
     </script>
 </body>
 </html>
