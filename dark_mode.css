@@ -1,3 +1,4 @@
+/* =================== DARK MODE =================== */
 .dark-mode {
     background-color: #121212;
     color: white;
@@ -7,6 +8,74 @@
     color: #90caf9;
 }
 
-#universityResources, #personalProjects {
+/* Sections transition smoothly */
+#universityResources, 
+#personalProjects {
     transition: all 0.3s ease-in-out;
+}
+
+/* =================== POPUP MODAL (LIGHT MODE) =================== */
+
+/* Full-screen overlay */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+/* Modal box (default light mode) */
+.modal-box {
+    background: white;
+    color: black;
+    width: 350px;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    animation: popup 0.3s ease-out;
+}
+
+/* Popup animation */
+@keyframes popup {
+    from { transform: scale(0.7); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+/* Button styling */
+.modal-box button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 15px;
+    cursor: pointer;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+.modal-box button:hover {
+    background: #0056b3;
+}
+
+/* =================== DARK MODE VERSION OF POPUP =================== */
+.dark-mode .modal-box {
+    background: #1e1e1e;   /* dark gray */
+    color: white;
+    box-shadow: 0 0 25px rgba(255,255,255,0.1);
+}
+
+.dark-mode .modal-box button {
+    background: #90caf9;
+    color: black;
+}
+
+.dark-mode .modal-box button:hover {
+    background: #64b5f6;
 }
