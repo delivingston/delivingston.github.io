@@ -79,3 +79,37 @@
 .dark-mode .modal-box button:hover {
     background: #64b5f6;
 }
+
+/* ================= TOOLTIP ================= */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: -35px;       /* Position above the button */
+    left: 0;
+    background: black;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+    z-index: 20;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Tooltip for Dark Mode */
+.dark-mode .tooltip-text {
+    background: #333;
+    color: #90caf9;
+}
