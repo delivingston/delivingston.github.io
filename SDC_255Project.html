@@ -9,6 +9,14 @@
 
 <body>
 
+    <!-- Welcome Popup Modal -->
+    <div id="welcomeModal" class="modal">
+        <div class="modal-box">
+            <h2>This page is a work in progress.</h2>
+            <button id="closeModalBtn">Close</button>
+        </div>
+    </div>
+
     <!-- Dark Mode Toggle -->
     <label>
         <input type="checkbox" id="darkModeToggle">
@@ -96,19 +104,33 @@
             <label for="message">Message:</label><br>
             <textarea id="message" name="message"></textarea><br><br>
 
-            <button type="submit" id="submitBtn">Submit</button>
+            <div class="tooltip">
+                <button type="submit" id="submitBtn">Submit</button>
+                <span class="tooltip-text">Click to send your message!</span>
+            </div>
+
         </form>
 
     </section>
 
     <!-- JavaScript Section -->
     <script>
-        // ================= Dynamic Welcome Message =================
-        let userName = prompt("Welcome! What is your name?");
-        const welcomeElement = document.getElementById("welcomeMessage");
-        welcomeElement.textContent = userName && userName.trim() !== ""
-            ? "Welcome to my homepage, " + userName + "!"
-            : "Welcome to my homepage!";
+
+        // ========== Welcome Popup Modal ==========
+        const modal = document.getElementById("welcomeModal");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+
+        // Show the popup when page loads
+        modal.style.display = "flex";
+
+        // Close the popup when clicking the button
+        closeModalBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+        });
+
+        // Set welcome message (removed old prompt)
+        document.getElementById("welcomeMessage").textContent = "Welcome to my homepage!";
+
 
         // ================= Featured Content Logic =================
         const uniDiv = document.getElementById("universityResources");
@@ -135,15 +157,26 @@
         });
 
         // ================= Dark Mode Toggle =================
+        // ================= Dark Mode with Local Storage =================
         const darkToggle = document.getElementById("darkModeToggle");
 
+        // Load preference on page load
+        if (localStorage.getItem("darkMode") === "enabled") {
+            document.body.classList.add("dark-mode");
+            darkToggle.checked = true;
+        }
+
+        // Listen for toggle
         darkToggle.addEventListener("change", function () {
             if (darkToggle.checked) {
                 document.body.classList.add("dark-mode");
+                localStorage.setItem("darkMode", "enabled");
             } else {
                 document.body.classList.remove("dark-mode");
+                localStorage.setItem("darkMode", "disabled");
             }
         });
+
 
         // ================= Dynamic New Section / Message =================
         const newProjectMsg = document.createElement("p");
