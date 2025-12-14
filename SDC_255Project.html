@@ -211,6 +211,89 @@
             }, 2000);
         });
 
+        /****************************************************
+        *  CUSTOM PROJECT OBJECTS & SESSION STORAGE
+        ****************************************************/
+
+        // Step 1: Create at least three project objects
+        const project1 = {
+            title: "C++ Item Tracker",
+            summary: "A console-based item tracking application built for Corner Grocer.",
+            image: "https://cdn-icons-png.flaticon.com/512/753/753318.png",
+            repo: "https://github.com/delivingston/Cplusplus-Program"
+        };
+
+        const project2 = {
+            title: "Software Development Lifecycle Docs",
+            summary: "A full SDLC documentation project demonstrating technical writing and system design.",
+            image: "https://cdn-icons-png.flaticon.com/512/1828/1828884.png",
+            repo: "https://github.com/delivingston/Software-Development-Lifecycle"
+        };
+
+        const project3 = {
+            title: "Adventure Game",
+            summary: "A text-based adventure game demonstrating object-oriented programming skills.",
+            image: "https://cdn-icons-png.flaticon.com/512/3523/3523063.png",
+            repo: "https://github.com/delivingston/AdventureGame"
+        };
+
+        // Step 2: Create array of newly created objects
+        let projectArray = [project1, project2, project3];
+
+        // Step 3: Store or load from sessionStorage on page load
+        if (!sessionStorage.getItem("projects")) {
+            sessionStorage.setItem("projects", JSON.stringify(projectArray));
+        } else {
+            projectArray = JSON.parse(sessionStorage.getItem("projects"));
+        }
+
+        // Step 4: Render dynamically into the Projects section
+        const projectSection = document.querySelector("#projects .project-container");
+
+        // Clear old hard-coded projects (your GitHub links)
+        projectSection.innerHTML = "";
+
+        // Loop through projects & add to DOM
+        projectArray.forEach(project => {
+
+        // wrapper div
+        const card = document.createElement("div");
+        card.style.border = "1px solid #444";
+        card.style.padding = "10px";
+        card.style.marginBottom = "15px";
+        card.style.borderRadius = "8px";
+
+        // image
+        const img = document.createElement("img");
+        img.src = project.image;
+        img.width = 60;
+        img.style.display = "block";
+        img.style.marginBottom = "10px";
+
+        // title
+        const title = document.createElement("h3");
+        title.textContent = project.title;
+
+        // summary
+        const summary = document.createElement("p");
+        summary.textContent = project.summary;
+
+        // link
+        const link = document.createElement("a");
+        link.href = project.repo;
+        link.target = "_blank";
+        link.textContent = "View Repository";
+
+        // append everything
+        card.appendChild(img);
+        card.appendChild(title);
+        card.appendChild(summary);
+        card.appendChild(link);
+
+        projectSection.appendChild(card);
+        });
+
+
     </script>
 </body>
 </html>
